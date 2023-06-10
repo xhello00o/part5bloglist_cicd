@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 const blogStyle = {
   paddingTop: 10,
   paddingLeft: 2,
@@ -7,31 +7,46 @@ const blogStyle = {
   marginBottom: 5
 }
 
-const Blog = ({blog}) => {  
-  console.log("blogcomp",blog)
+const Blog = ({ blog,addLike,deleteblog }) => {
+  console.log('blogcomp',blog)
   const [detailVisible, setDetailsVisible] = useState(false)
 
-const handlevisible =(event)=>{
-  event.preventDefault()
-  setDetailsVisible(!detailVisible)
-}
+  const handlevisible =(event) => {
+    event.preventDefault()
+    setDetailsVisible(!detailVisible)
+  }
 
-  return (  
-  <div style={blogStyle}>
-    
-    {detailVisible?
-    <p> {blog.title} {blog.author} <button onClick={handlevisible}>hide</button> <br />
-    {blog.url} <br />
-    likes {blog.likes} <button>like</button> <br />    
-    {blog.user.name}
-  </p>
-    :<p> {blog.title} {blog.author} <button onClick={handlevisible}>view</button></p>
-      
-    }
+  const handlelike =(event) => {
+    event.preventDefault()
+    addLike(blog.id)
+    setDetailsVisible(true)
+  }
 
-  </div>
-  
-    )
+  const handledelete = (event) => {
+    event.preventDefault()
+    deleteblog(blog.id,blog)
+
+
+  }
+
+
+  return (
+    <div style={blogStyle}>
+
+      {detailVisible?
+        <p> {blog.title} {blog.author} <button onClick={handlevisible}>hide</button> <br />
+          {blog.url} <br />
+    likes {blog.likes} <button onClick={handlelike}>like</button> <br />
+          {blog.user.name}<br />
+          <button onClick={handledelete}> remove </button>
+        </p>
+        :<p> {blog.title} {blog.author} <button onClick={handlevisible}>view</button></p>
+
+      }
+
+    </div>
+
+  )
 }
 
 export default Blog
