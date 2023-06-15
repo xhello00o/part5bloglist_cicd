@@ -26,20 +26,26 @@ const CreateBlog = ({ createblogreq, handlecancel }) => {
         <div>
                     Title:
           <input
+            id ='title'
             value={title}
-            onChange={({ target }) => { setTitle(target.value) }} ></input>
+            onChange={({ target }) => { setTitle(target.value) }}
+            placeholder = 'e.g The Little Red Riding Hood...' />
         </div>
         <div>
                     Author:
           <input
+            id = 'author'
             value={author}
-            onChange={({ target }) => { setAuthor(target.value) }} ></input>
+            onChange={({ target }) => { setAuthor(target.value) }}
+            placeholder = {'Name like Ronald McDonalds...'}/>
         </div>
         <div>
                     URL:
           <input
+            id = 'url'
             value={url}
-            onChange={({ target }) => { setUrl(target.value) }} ></input>
+            onChange={({ target }) => { setUrl(target.value) }}
+            placeholder = 'www.readabook.com...'/>
         </div>
         <div>
           <button type="submit">Create</button>

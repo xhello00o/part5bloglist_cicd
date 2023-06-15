@@ -1,0 +1,13 @@
+{
+    "eslint.run": "onSave",
+    "eslint.useESLintClass": false,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "eslint.trace.server": "off",
+    "eslint.lintTask.enable": false,
+    "eslint.format.enable": true,
+}
