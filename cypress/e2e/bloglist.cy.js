@@ -1,5 +1,3 @@
-
-
 describe('Bloglist app', () => {
   beforeEach(function () {
     cy.request('POST','http://localhost:3003/api/testing/reset')
@@ -48,7 +46,7 @@ describe('Bloglist app', () => {
         })
       cy.visit('http://localhost:3000')
     })
-    it.only('create a blog', function(){
+    it('create a blog', function(){
       cy.contains('Create New Blog').click()
       cy.get('#title').type('test title')
       cy.get('#author').type('test author')
@@ -67,19 +65,79 @@ describe('Bloglist app', () => {
         .and('contain','test url')
 
     })
-    it.only('like a blog', function (){
+    it('like a blog', function (){
       cy.createBlog({
         title:'test title',
         author:'test author',
         url:'test url'
+
       })
       cy.visit('http://localhost:3000')
       cy.contains('Create New Blog').click()
       cy.get('p').contains('test author').parent().find('button').as('viewButton').click()
       cy.get('p').get('button').contains('like').click()
       cy.get('p').contains('likes').should('contain','likes 1')
-      
+
     })
+    it('delete a blog', function(){
+      cy.createBlog({
+        title:'test title',
+        author:'test author',
+        url:'test url'
+      })
+      cy.visit('http://localhost:3000')
+      cy.get('p').contains('test title').find('button').as('viewbutton').click()
+      cy.get('p').contains('remove').click()
+      cy.get('p').should('not.contain','test title')
+    })
+
+    it('only show delete for blogs created by user', function(){
+      cy.createUser({
+        username:'root2',
+        name:'testroot2',
+        password:'password1234'
+      })
+      cy.createBlog({
+        title:'test title',
+        author:'test author',
+        url:'test url'
+      })
+      cy.visit('http://localhost:3000')
+      cy.contains('logout').click()
+      cy.get('#username').type('root2')
+      cy.get('#password').type('password1234')
+      cy.contains('login').click()
+      cy.get('p').contains('test title').find('button').click()
+      cy.get('p').contains('test title').should('not.contain','remove')
+
+    })
+    it('Blogs are sorted', function(){
+      cy.createBlog({
+        title:'test title2',
+        author:'test author',
+        url:'test url',
+        likes:5
+      })
+      cy.createBlog({
+        title:'test title1',
+        author:'test author',
+        url:'test url',
+        likes:10
+      })
+      cy.createBlog({
+        title:'test title3',
+        author:'test author',
+        url:'test url',
+        likes:1
+      })
+      cy.visit('http://localhost:3000')
+      cy.get('.blog').eq(0).should('contain',' test title1')
+      cy.get('.blog').eq(1).should('contain',' test title2')
+      cy.get('.blog').eq(2).should('contain',' test title3')
+
+
+    })
+
 
 
   })

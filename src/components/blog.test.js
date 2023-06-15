@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event'
 import CreateBlog from './CreateBlog'
 
 describe('Tests for Blog', () => {
-  test(`renders the blog's title and author, but does not render its URL or number of likes by default`, () => {
+  test('renders the blog\'s title and author, but does not render its URL or number of likes by default', () => {
     const blog = {
       title: 'React patterns',
       author: 'Michael Chan',
@@ -24,7 +24,7 @@ describe('Tests for Blog', () => {
 
   })
 
-  test(`blog's URL and number of likes are shown when the button controlling the shown details has been clicked.`,
+  test('blog\'s URL and number of likes are shown when the button controlling the shown details has been clicked.',
     async () => {
       const blog = {
         title: 'React patterns',
@@ -48,7 +48,7 @@ describe('Tests for Blog', () => {
     }
   )
 
-  test(`if the like button is clicked twice, the event handler the component received as props is called twice`,
+  test('if the like button is clicked twice, the event handler the component received as props is called twice',
     async () => {
       const blog = {
         title: 'React patterns',
@@ -88,7 +88,7 @@ describe('tests for BlogForm', () => {
     author: 'Michael Chan',
     url: 'https://reactpatterns.com/',
   }
-  test(` the form calls the event handler it received as props with the right details when a new blog is created`, async () => {
+  test(' the form calls the event handler it received as props with the right details when a new blog is created', async () => {
     const createBlog = jest.fn()
     const user = userEvent.setup()
 

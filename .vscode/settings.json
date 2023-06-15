@@ -1,5 +1,5 @@
 {
-    "eslint.run": "onSave",
+    "eslint.run": "onType",
     "eslint.useESLintClass": false,
     "eslint.validate": [
         "javascript",
@@ -8,6 +8,7 @@
         "typescriptreact"
     ],
     "eslint.trace.server": "off",
-    "eslint.lintTask.enable": false,
+    "eslint.lintTask.enable": true,
     "eslint.format.enable": true,
+    "eslint.codeActionsOnSave.rules": null,
 }
