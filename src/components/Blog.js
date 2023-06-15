@@ -27,7 +27,7 @@ const Blog = ({ blog, addLike, deleteblog, user }) => {
     event.preventDefault();
     deleteblog(blog.id, blog);
   };
-  
+
 
   return (
     <div style={blogStyle}>
