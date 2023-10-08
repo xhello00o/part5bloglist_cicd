@@ -11,7 +11,7 @@ describe('Bloglist app', () => {
 
     cy.request('POST','http://localhost:3003/api/users',user)
 
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003')
   })
   it('web opens successfully with correct default login page', () => {
     cy.contains('Username')
@@ -44,7 +44,7 @@ describe('Bloglist app', () => {
         .then(response => {
           localStorage.setItem('loggedUser',JSON.stringify(response.body))
         })
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:3003')
     })
     it('create a blog', function(){
       cy.contains('Create New Blog').click()
@@ -72,7 +72,7 @@ describe('Bloglist app', () => {
         url:'test url'
 
       })
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:3003')
       cy.contains('Create New Blog').click()
       cy.get('p').contains('test author').parent().find('button').as('viewButton').click()
       cy.get('p').get('button').contains('like').click()
@@ -85,7 +85,7 @@ describe('Bloglist app', () => {
         author:'test author',
         url:'test url'
       })
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:3003')
       cy.get('p').contains('test title').find('button').as('viewbutton').click()
       cy.get('p').contains('remove').click()
       cy.get('p').should('not.contain','test title')
@@ -102,7 +102,7 @@ describe('Bloglist app', () => {
         author:'test author',
         url:'test url'
       })
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:3003')
       cy.contains('logout').click()
       cy.get('#username').type('root2')
       cy.get('#password').type('password1234')
@@ -116,21 +116,21 @@ describe('Bloglist app', () => {
         title:'test title2',
         author:'test author',
         url:'test url',
-        likes:5
+        likes:99
       })
       cy.createBlog({
         title:'test title1',
         author:'test author',
         url:'test url',
-        likes:10
+        likes:100
       })
       cy.createBlog({
         title:'test title3',
         author:'test author',
         url:'test url',
-        likes:1
+        likes:98
       })
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:3003')
       cy.get('.blog').eq(0).should('contain',' test title1')
       cy.get('.blog').eq(1).should('contain',' test title2')
       cy.get('.blog').eq(2).should('contain',' test title3')

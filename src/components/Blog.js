@@ -49,7 +49,7 @@ const Blog = ({ blog, addLike, deleteblog, user }) => {
       ) : (
         <p>
           {' '}
-          {blog.title} {blog.author}{' '}
+          {blog.title} by {blog.author}{' '}
           <button onClick={handlevisible}>view</button>
         </p>
       )}

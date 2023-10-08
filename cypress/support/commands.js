@@ -1,4 +1,4 @@
-Cypress.Commands.add('createBlog', ({ title, author, url, likes}) => {
+Cypress.Commands.add('createBlog', ({ title, author, url, likes }) => {
 
   cy.request({
     method: 'POST',
