@@ -73,7 +73,7 @@ const initialBlogs = [
 ]
 
 
-testrouter.post('/reset', async (request, response, next) => {
+testrouter.post('/reset', async (request, response, ) => {
   const blogres = await Blog.deleteMany({})
   console.log(
     '🚀 ~ file: testrouter.js:10 ~ testrouter.post ~ blogres:',

@@ -1,18 +1,17 @@
 const blogrouter = require('express').Router()
 const Blog = require('../models/bloglist')
 const User = require('../models/user')
-const jwt = require('jsonwebtoken')
 const middleware = require('../util/middleware')
 require('dotenv').config()
 
 
 
-blogrouter.get('/', async (request, response, next) => {
+blogrouter.get('/', async (request, response, ) => {
   const blogs = await Blog.find({}).populate('user', { blogs: 0 })
   response.json(blogs)
 })
 
-blogrouter.get('/:id', async (request, response, next) => {
+blogrouter.get('/:id', async (request, response, ) => {
 
 
   const result = await Blog.findById(request.params.id)
@@ -27,7 +26,7 @@ blogrouter.get('/:id', async (request, response, next) => {
 })
 
 
-blogrouter.post('/', middleware.userExtractor, async (request, response, next) => {
+blogrouter.post('/', middleware.userExtractor, async (request, response, ) => {
   const blogreq = request.body
   console.log(blogreq)
 
@@ -65,7 +64,7 @@ blogrouter.post('/', middleware.userExtractor, async (request, response, next) =
 
 })
 
-blogrouter.delete('/:id', middleware.userExtractor, async (request, response, next) => {
+blogrouter.delete('/:id', middleware.userExtractor, async (request, response, ) => {
   console.log('abc', request.params)
 
   const findblog = await Blog.findById(request.params.id)
@@ -93,11 +92,12 @@ blogrouter.delete('/:id', middleware.userExtractor, async (request, response, ne
   }
 })
 
-blogrouter.delete('/all', async (request, response, next) => {
+blogrouter.delete('/all', async (request, response, ) => {
   const allblogs = await Blog.find({})
   for (let oneblog of allblogs) {
     const eachuser = await User.findById(oneblog.user)
     console.log('eachuser', eachuser)
+    // eslint-disable-next-line no-unused-vars
     const filteredblogs = eachuser.blogs.filter(blog => false)
     console.log('filtered', filteredblogs)
     const user = {

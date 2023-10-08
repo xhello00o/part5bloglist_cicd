@@ -17,6 +17,7 @@ mongoose
   .connect(
     config.MONGO_DB_URI
   )
+  // eslint-disable-next-line no-unused-vars
   .then((response) => {
     logger.info('DB connected')
   })
