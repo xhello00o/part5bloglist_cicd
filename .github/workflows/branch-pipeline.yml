@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Branch Testing pipeline
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main-pull
   
 jobs:
-  simple_deployment_pipeline:
+  simple_testing_pipeline:
     runs-on: ubuntu-20.04
     env:
       MONGO_DB_PW: ${{secrets.MONGO_DB_PW}}
