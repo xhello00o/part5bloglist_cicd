@@ -6,7 +6,7 @@ require('dotenv').config()
 
 
 
-loginrouter.post('/', async (request, response, next) => {
+loginrouter.post('/', async (request, response) => {
   const username = request.body.username
   const password = request.body.password
   const user = await User.find({ username })
@@ -31,7 +31,7 @@ loginrouter.post('/', async (request, response, next) => {
 
   const token = jwt.sign(userToken, process.env.SECRET)
 
-  response.status(200).send({ token, username: user[0].username, name: user[0].name })
+  return response.status(200).send({ token, username: user[0].username, name: user[0].name })
 
 
 })

@@ -1,4 +1,3 @@
-const bloglist = require('../models/bloglist')
 const listHelper = require('../util/list_helper')
 
 test('dummy returns one', () => {

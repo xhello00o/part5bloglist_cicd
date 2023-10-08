@@ -30,7 +30,6 @@ const CreateBlog = ({ createblogreq, handlecancel }) => {
             value={title}
             onChange={({ target }) => { setTitle(target.value) }}
             placeholder = 'e.g The Little Red Riding Hood...' />
-            asdasd.
         </div>
         <div>
                     Author:

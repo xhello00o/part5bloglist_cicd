@@ -1,33 +1,32 @@
 const blogrouter = require('express').Router()
 const Blog = require('../models/bloglist')
 const User = require('../models/user')
-const jwt = require('jsonwebtoken')
 const middleware = require('../util/middleware')
 require('dotenv').config()
 
 
 
-blogrouter.get('/', async (request, response, next) => {
+blogrouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', { blogs: 0 })
-  response.json(blogs)
+  return response.json(blogs)
 })
 
-blogrouter.get('/:id', async (request, response, next) => {
+blogrouter.get('/:id', async (request, response ) => {
 
 
   const result = await Blog.findById(request.params.id)
 
   if (result) {
-    response.json(result)
+    return response.json(result)
   } else {
-    response.status(404).end('404: Id cannot be found')
+    return response.status(404).end('404: Id cannot be found')
   }
 
 
 })
 
 
-blogrouter.post('/', middleware.userExtractor, async (request, response, next) => {
+blogrouter.post('/', middleware.userExtractor, async (request, response, ) => {
   const blogreq = request.body
   console.log(blogreq)
 
@@ -55,7 +54,7 @@ blogrouter.post('/', middleware.userExtractor, async (request, response, next) =
   const userresult = await user.save()
   console.log('user', userresult)
 
-  response.status(201).json(
+  return response.status(201).json(
     { ...respResult,
       user:{
         username:userresult.username,
@@ -65,7 +64,7 @@ blogrouter.post('/', middleware.userExtractor, async (request, response, next) =
 
 })
 
-blogrouter.delete('/:id', middleware.userExtractor, async (request, response, next) => {
+blogrouter.delete('/:id', middleware.userExtractor, async (request, response, ) => {
   console.log('abc', request.params)
 
   const findblog = await Blog.findById(request.params.id)
@@ -86,18 +85,19 @@ blogrouter.delete('/:id', middleware.userExtractor, async (request, response, ne
 
     const resp = await Blog.findByIdAndRemove(request.params.id)
 
-    response.status(201).json(resp)
+    return response.status(201).json(resp)
   }
   else {
     return response.status(401).json({ error: 'invalid user' })
   }
 })
 
-blogrouter.delete('/all', async (request, response, next) => {
+blogrouter.delete('/all', async (request, response, ) => {
   const allblogs = await Blog.find({})
   for (let oneblog of allblogs) {
     const eachuser = await User.findById(oneblog.user)
     console.log('eachuser', eachuser)
+    // eslint-disable-next-line no-unused-vars
     const filteredblogs = eachuser.blogs.filter(blog => false)
     console.log('filtered', filteredblogs)
     const user = {
@@ -114,7 +114,7 @@ blogrouter.delete('/all', async (request, response, next) => {
 
 
   const delresp = await Blog.deleteMany({})
-  response.status(201).json({ message: 'successfuly deleted all', delresp })
+  return response.status(201).json({ message: 'successfuly deleted all', delresp })
 })
 
 blogrouter.put('/:id', middleware.userExtractor, async (request, response, next) => {
@@ -152,7 +152,7 @@ blogrouter.put('/:id', middleware.userExtractor, async (request, response, next)
       next(error)
     }
     console.log('test', result)
-    response.status(200).json(result)
+    return response.status(200).json(result)
   } else {
     return response.status(401).json({ error: 'invalid user' })
   }

@@ -8,10 +8,14 @@ on:
     branches: [main]
     types: [opened, synchronize]
   
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    env:
+      MONGO_DB_PW: ${{secrets.MONGO_DB_PW}}
+      MONGO_DB_USER: ${{secrets.MONGO_DB_USER}}
+      SECRET: ${{secrets.SECRET}}
+      
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -25,6 +29,7 @@ jobs:
       
       - name: Test
         run: npm run test
+      
 
       - name: build
         run: npm run build      
@@ -33,34 +38,31 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+          start: npm run start-test
+          wait-on: http://localhost:3003
 
       - name: Render Deployment
-        if: ${{ github.event_name == 'push' && github.ref_name == 'render_deployment' && !contains(join(github.event.commits.*.message),'#skip')}}
+        if: ${{ github.event_name == 'push' && github.ref_name == 'main' && !contains(join(github.event.commits.*.message),'#skip')}}
         run : curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
       - name: Bump version and tag
-        if: ${{ github.event_name == 'push' && github.ref_name == 'render_deployment' && !contains(join(github.event.commits.*.message),'#skip') }}
+        if: ${{ github.event_name == 'push' && github.ref_name == 'main' && !contains(join(github.event.commits.*.message),'#skip') }}
         uses: anothrNick/github-tag-action@1.67.0
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           WITH_V: true
           DEFAULT_BRANCH: render_deployment
-  notification:
-    needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
-    steps:
+
       - name:  success notification 
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: ${{success()}}
         with: 
           severity: info
           details: test success
           webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
       - name: failure notification
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: ${{ failure()}} 
         with: 
           severity: error
           details: test failed

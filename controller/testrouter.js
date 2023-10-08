@@ -73,7 +73,7 @@ const initialBlogs = [
 ]
 
 
-testrouter.post('/reset', async (request, response, next) => {
+testrouter.post('/reset', async (request, response, ) => {
   const blogres = await Blog.deleteMany({})
   console.log(
     '🚀 ~ file: testrouter.js:10 ~ testrouter.post ~ blogres:',
@@ -116,7 +116,7 @@ testrouter.post('/reset', async (request, response, next) => {
     counter += 2
   }
 
-  response.status(204).end()
+  return response.status(204).end()
 })
 
 module.exports = testrouter
