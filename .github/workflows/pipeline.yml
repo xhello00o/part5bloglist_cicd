@@ -23,7 +23,12 @@ jobs:
         run: npm run eslint
       
       - name: Test
+        env:
+            MONGO_DB_PW: ${{secrets.MONGO_DB_PW}}
+            MONGO_DB_USER: ${{secrets.MONGO_DB_USER}}
+            SECRET: ${{secrets.SECRET}}
         run: npm run test
+      
 
       - name: build
         run: npm run build      

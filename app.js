@@ -10,8 +10,6 @@ const logger = require('./util/logger')
 const userrouter = require('./controller/userrouter')
 const loginrouter = require('./controller/loginrouter')
 
-logger.info(config.MONGO_DB_USER)
-logger.info(config.MONGO_DB_PW)
 mongoose.set('strictQuery', false)
 mongoose
   .connect(
@@ -25,12 +23,13 @@ mongoose
     logger.info('Error Occured')
     logger.error(error)
   })
-app.use(express.static('build'))
+
 app.use(cors())
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.tokenExtractor)
 
+app.use(express.static('build'))
 
 app.use('/api/login', loginrouter)
 app.use('/api/blogs',blogrouter)

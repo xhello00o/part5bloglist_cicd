@@ -6,20 +6,20 @@ require('dotenv').config()
 
 
 
-blogrouter.get('/', async (request, response, ) => {
+blogrouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', { blogs: 0 })
-  response.json(blogs)
+  return response.json(blogs)
 })
 
-blogrouter.get('/:id', async (request, response, ) => {
+blogrouter.get('/:id', async (request, response ) => {
 
 
   const result = await Blog.findById(request.params.id)
 
   if (result) {
-    response.json(result)
+    return response.json(result)
   } else {
-    response.status(404).end('404: Id cannot be found')
+    return response.status(404).end('404: Id cannot be found')
   }
 
 
@@ -54,7 +54,7 @@ blogrouter.post('/', middleware.userExtractor, async (request, response, ) => {
   const userresult = await user.save()
   console.log('user', userresult)
 
-  response.status(201).json(
+  return response.status(201).json(
     { ...respResult,
       user:{
         username:userresult.username,
@@ -85,7 +85,7 @@ blogrouter.delete('/:id', middleware.userExtractor, async (request, response, ) 
 
     const resp = await Blog.findByIdAndRemove(request.params.id)
 
-    response.status(201).json(resp)
+    return response.status(201).json(resp)
   }
   else {
     return response.status(401).json({ error: 'invalid user' })
@@ -114,7 +114,7 @@ blogrouter.delete('/all', async (request, response, ) => {
 
 
   const delresp = await Blog.deleteMany({})
-  response.status(201).json({ message: 'successfuly deleted all', delresp })
+  return response.status(201).json({ message: 'successfuly deleted all', delresp })
 })
 
 blogrouter.put('/:id', middleware.userExtractor, async (request, response, next) => {
@@ -152,7 +152,7 @@ blogrouter.put('/:id', middleware.userExtractor, async (request, response, next)
       next(error)
     }
     console.log('test', result)
-    response.status(200).json(result)
+    return response.status(200).json(result)
   } else {
     return response.status(401).json({ error: 'invalid user' })
   }

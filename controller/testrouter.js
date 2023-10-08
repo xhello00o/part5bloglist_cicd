@@ -116,7 +116,7 @@ testrouter.post('/reset', async (request, response, ) => {
     counter += 2
   }
 
-  response.status(204).end()
+  return response.status(204).end()
 })
 
 module.exports = testrouter
