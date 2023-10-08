@@ -53,14 +53,14 @@ jobs:
     steps:
       - name:  success notification 
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: ${{success()}}
         with: 
           severity: info
           details: test success
           webhookUrl: ${{secrets.DISCORD_WEBHOOK}}
       - name: failure notification
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: ${{ failure()}} 
         with: 
           severity: error
           details: test failed
