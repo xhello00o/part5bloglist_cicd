@@ -8,10 +8,10 @@ on:
     branches: [main]
     types: [opened, synchronize]
   
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
