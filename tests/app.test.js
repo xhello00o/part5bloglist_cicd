@@ -131,7 +131,7 @@ beforeEach(async () => {
 
 describe('HTTP /api/blogs GET', () => {
   test('notes are returned as json', async () => {
-    const resp = await api
+    await api
       .get('/api/blogs')
       .expect(200)
       .expect('Content-Type', /application\/json/)
