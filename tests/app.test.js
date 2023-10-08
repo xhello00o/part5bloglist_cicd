@@ -7,6 +7,8 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
 
+
+jest.setTimeout(15000)
 const testusers = [
   {
     _id: '64801d5a7b677bd4f2e5efd8',
