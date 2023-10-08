@@ -6,7 +6,7 @@ require('dotenv').config()
 
 
 
-loginrouter.post('/', async (request, response, next) => {
+loginrouter.post('/', async (request, response) => {
   const username = request.body.username
   const password = request.body.password
   const user = await User.find({ username })
