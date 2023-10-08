@@ -47,7 +47,7 @@ jobs:
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           WITH_V: true
-          DEFAULT_BRANCH: render_deployment
+          DEFAULT_BRANCH: main
 
       - name:  success notification 
         uses: rjstone/discord-webhook-notify@v1
