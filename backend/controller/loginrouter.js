@@ -1,7 +1,7 @@
 const loginrouter = require('express').Router()
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const User = require('../models/user')
+const { User } = require('../mongo/index')
 require('dotenv').config()
 
 

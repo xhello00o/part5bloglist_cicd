@@ -1,6 +1,5 @@
 const testrouter = require('express').Router()
-const Blog = require('../models/bloglist')
-const User = require('../models/user')
+const { Blog, User } = require('../mongo/index')
 const bcrypt = require('bcrypt')
 
 const userList = [

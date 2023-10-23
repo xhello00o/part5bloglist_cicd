@@ -1,12 +1,12 @@
 const blogrouter = require('express').Router()
-const Blog = require('../models/bloglist')
-const User = require('../models/user')
+const { Blog }= require('../mongo/index')
+const { User } = require('../mongo/index')
 const middleware = require('../util/middleware')
-require('dotenv').config()
 
 
 
 blogrouter.get('/', async (request, response) => {
+  console.log(Blog,'blog')
   const blogs = await Blog.find({}).populate('user', { blogs: 0 })
   return response.json(blogs)
 })

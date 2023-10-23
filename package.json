@@ -30,8 +30,8 @@
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
     "eslint": "eslint ./**/*.{js,jsx}",
-    "start-prod": "cross-env NODE_ENV=production node index.js",
-    "start-test": "cross-env NODE_ENV=test nodemon index.js",
+    "start-prod": "cross-env NODE_ENV=production node ./backend/index.js",
+    "start-test": "cross-env NODE_ENV=test nodemon ./backend/index.js",
     "cross-env": "^7.0.3",
     "test:e2e": "cypress run"
   },

@@ -4,25 +4,10 @@ const app = express()
 const cors = require('cors')
 const blogrouter = require('./controller/blogrouter')
 const middleware = require('./util/middleware')
-const config = require('./util/config')
-const mongoose = require('mongoose')
-const logger = require('./util/logger')
 const userrouter = require('./controller/userrouter')
 const loginrouter = require('./controller/loginrouter')
 
-mongoose.set('strictQuery', false)
-mongoose
-  .connect(
-    config.MONGO_DB_URI
-  )
-  // eslint-disable-next-line no-unused-vars
-  .then((response) => {
-    logger.info('DB connected')
-  })
-  .catch((error) => {
-    logger.info('Error Occured')
-    logger.error(error)
-  })
+
 
 app.use(cors())
 app.use(express.json())

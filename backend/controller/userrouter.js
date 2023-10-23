@@ -1,5 +1,5 @@
 const userrouter = require('express').Router()
-const User = require('../models/user')
+const { User } = require('../mongo/index')
 const bcrypt  = require ('bcrypt')
 
 userrouter.post('/', async (request,response) => {
