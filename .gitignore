@@ -5,7 +5,8 @@
 /.pnp
 .pnp.js
 /backend/mongo/mongo_data
-
+/build
+/.github
 # testing
 /coverage
 

@@ -15,7 +15,7 @@ if (process.env.MONGO_URL && !mongoose.connection.readyState) {
   // eslint-disable-next-line no-unused-vars
     .then((response) => {
       logger.info('DB connected')
-      logger.info(response)
+      console.log('hi')
     })
     .catch((error) => {
       logger.info('Error Occured')

@@ -24,12 +24,13 @@
     "supertest": "^6.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start ./frontend/",
+    "build": "react-scripts build ./frontend",
     "test": "jest ./tests/app.test.js --detectOpenHandles",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
-    "eslint": "eslint ./**/*.{js,jsx}",
+    "eslint-frontend": "eslint ./frontend/**/*.{js,jsx}",
+    "eslint-backend": "eslint ./backend/**/*.{js,jsx}",
     "start-prod": "cross-env NODE_ENV=production node ./backend/index.js",
     "start-test": "cross-env NODE_ENV=test nodemon ./backend/index.js",
     "cross-env": "^7.0.3",
@@ -53,7 +54,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3003",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",

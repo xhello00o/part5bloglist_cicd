@@ -135,7 +135,7 @@ const App = () => {
   const showblogs = () => {
     return (
       <div>
-        <h2>Blogs</h2>
+        <h2>Blog</h2>
         <p>
           {user.name} logged in <button onClick={handlelogout}>logout</button>
         </p>

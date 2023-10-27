@@ -7,6 +7,6 @@ COPY ./package-lock.json .
 
 RUN npm install
 
-COPY ./frontend/ .
+COPY ./backend  ./backend
 
-CMD [ "npm", "run","start" ]
+CMD [ "npm", "run","start-prod" ]

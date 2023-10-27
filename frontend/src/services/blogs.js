@@ -1,5 +1,10 @@
 import axios from 'axios'
-const baseUrl = '/api/blogs'
+
+const domain = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000'
+const baseUrl = `${domain}/api/blogs`
+
+console.log(baseUrl)
+
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
@@ -7,6 +12,7 @@ const getAll = async () => {
 }
 let token = null
 const setToken = newToken => {
+  console.log(newToken,'added')
   token = `Bearer ${newToken}`
 }
 
